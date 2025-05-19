@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors({
   // 在生產環境中，您可能想要限制哪些網域可以訪問您的 API
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://zanvoai-portfolio.onrender.com', 'https://your-custom-domain.com', 'https://www.your-custom-domain.com'] 
+    ? ['https://zanvoai-portfolio.onrender.com', 'https://zanvoai.com', 'https://www.zanvoai.com'] 
     : '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
