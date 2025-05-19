@@ -1,0 +1,17 @@
+services:
+  # 後端 API 服務
+  - type: web
+    name: zanvoai-portfolio-api
+    runtime: node
+    plan: free # 可以選擇 free 或其他付費計劃
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000 # Render 會自動分配端口，但我們設置一個默認值
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # 這表示需要手動設置，不會從此文件讀取
+    autoDeploy: true # 當有新的提交時自動部署
