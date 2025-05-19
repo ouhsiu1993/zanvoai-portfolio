@@ -48,7 +48,7 @@ const ProjectGrid = () => {
           color="gray.600"
           _dark={{ color: 'gray.300' }}
         >
-          探索 ZanvoAI 的專案作品，點擊卡片以查看更多詳情
+          探索 ZanvoAI 的專案作品，點擊卡片開始試玩
         </Text>
       </Box>
 
@@ -58,8 +58,8 @@ const ProjectGrid = () => {
         </Center>
       ) : (
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id || index} project={project} />
           ))}
         </SimpleGrid>
       )}

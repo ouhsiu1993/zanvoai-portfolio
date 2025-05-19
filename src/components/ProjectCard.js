@@ -11,12 +11,35 @@ import {
 } from '@chakra-ui/react';
 import { FiExternalLink } from 'react-icons/fi';
 
+// 標籤顏色映射表 - 根據標籤名稱選擇顏色
+const tagColorSchemes = {
+  '0 to 1 Product': 'blue',
+  'Saas': 'green',
+  'AI Coding': 'yellow',
+  'InfoSec': 'orange',
+  'AI Agent': 'pink',
+  'Prompt Engineering': 'green',
+  'MarTech': 'orange',
+  'Tracking Code': 'purple',
+  'AdTech': 'teal',
+  'FinTech': 'purple',
+  '..': 'pink',
+  '..': 'blue',
+  '..': 'cyan',
+  '..': 'red',
+  '..': 'teal',
+};
+
+// 根據標籤名稱判斷用哪種顏色，若無對應項則使用預設顏色
+const getTagColorScheme = (tag) => {
+  return tagColorSchemes[tag] || 'gray';
+};
+
 const ProjectCard = ({ project }) => {
   const { title, description, imageUrl, tags, projectUrl } = project;
   
   const cardBg = useColorModeValue('white', 'gray.800');
   const cardBorder = useColorModeValue('gray.200', 'gray.700');
-  const tagBg = useColorModeValue('gray.100', 'gray.700');
   const textColor = useColorModeValue('gray.600', 'gray.300');
   
   return (
@@ -64,21 +87,22 @@ const ProjectCard = ({ project }) => {
           </Text>
           
           <Flex wrap="wrap" gap={2} mb={4}>
-            {tags?.map((tag, index) => (
-              <Badge
-                key={index}
-                colorScheme="blue"
-                bg={tagBg}
-                color="blue.500"
-                px={2}
-                py={1}
-                borderRadius="md"
-                fontSize="xs"
-                fontWeight="medium"
-              >
-                {tag}
-              </Badge>
-            ))}
+            {tags?.map((tag, index) => {
+              const colorScheme = getTagColorScheme(tag);
+              return (
+                <Badge
+                  key={index}
+                  colorScheme={colorScheme}
+                  px={2}
+                  py={1}
+                  borderRadius="md"
+                  fontSize="xs"
+                  fontWeight="medium"
+                >
+                  {tag}
+                </Badge>
+              );
+            })}
           </Flex>
           
           <Flex align="center" justifyContent="flex-end" color="blue.500">

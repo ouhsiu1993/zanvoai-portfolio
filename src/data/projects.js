@@ -3,7 +3,7 @@ const projects = [
     id: 1,
     title: 'AI 語音助手',
     description: '基於先進自然語言處理技術的智能語音助手，支援多語言對話與任務處理。',
-    imageUrl: 'https://via.placeholder.com/800x450?text=AI+Voice+Assistant',
+    imageUrl: 'image/',
     tags: ['React', 'Node.js', 'TensorFlow', 'WebSpeech API'],
     projectUrl: 'https://example.com/ai-assistant',
   },
