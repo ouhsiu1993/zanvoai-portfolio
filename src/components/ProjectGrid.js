@@ -50,6 +50,16 @@ const ProjectGrid = () => {
         >
           探索 ZanvoAI 的專案作品，點擊卡片開始試玩
         </Text>
+        <Text
+          fontSize="md"
+          maxW="container.md"
+          mx="auto"
+          mt={2}
+          color="gray.500"
+          _dark={{ color: 'gray.400' }}
+        >
+          免費服務有冷啟動時間，還請耐心等候
+        </Text>
       </Box>
 
       {loading ? (
