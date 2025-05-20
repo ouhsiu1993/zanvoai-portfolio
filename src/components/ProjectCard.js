@@ -120,7 +120,7 @@ const ProjectCard = ({ project }) => {
           <Flex align="center" justifyContent="flex-end" color="blue.500">
             <FiExternalLink />
             <Text ml={1} fontSize="sm" fontWeight="medium">
-              查看專案
+              前往試玩
             </Text>
           </Flex>
         </Flex>
