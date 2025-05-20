@@ -10,6 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { FiExternalLink } from 'react-icons/fi';
+import { trackEvent } from './Analytics'; // 修正導入路徑，假設在同一目錄
 
 // 標籤顏色映射表 - 根據標籤名稱選擇顏色
 const tagColorSchemes = {
@@ -42,12 +43,23 @@ const ProjectCard = ({ project }) => {
   const cardBorder = useColorModeValue('gray.200', 'gray.700');
   const textColor = useColorModeValue('gray.600', 'gray.300');
   
+  // 處理點擊事件
+  const handleProjectClick = () => {
+    // 發送點擊事件到 GA4
+    trackEvent('project_click', { 
+      project_name: title,
+      project_url: projectUrl,
+      tags: tags ? tags.join(', ') : ''
+    });
+  };
+  
   return (
     <Link 
       href={projectUrl} 
       isExternal 
       _hover={{ textDecoration: 'none' }}
       display="block"
+      onClick={handleProjectClick} // 添加點擊處理器
     >
       <Box
         bg={cardBg}
