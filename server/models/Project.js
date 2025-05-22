@@ -1,3 +1,4 @@
+// server/models/Project.js
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema(
@@ -23,6 +24,10 @@ const projectSchema = new mongoose.Schema(
     projectUrl: {
       type: String,
       required: true,
+    },
+    notionUrl: {  // 新增欄位
+      type: String,
+      required: false,
     },
     featured: {
       type: Boolean,

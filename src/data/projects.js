@@ -1,51 +1,75 @@
+// src/data/projects.js
 const projects = [
   {
-    id: 1,
-    title: 'AI 語音助手',
-    description: '基於先進自然語言處理技術的智能語音助手，支援多語言對話與任務處理。',
-    imageUrl: 'image/',
-    tags: ['React', 'Node.js', 'TensorFlow', 'WebSpeech API'],
-    projectUrl: 'https://example.com/ai-assistant',
+    _id: "682b65595204acecad854dc1",
+    title: "Stock-Tracker | 資產追蹤工具",
+    description: "Stock Tracker 是一款為初學者量身打造的股票資產管理工具，結合即時價格查詢、自動分類標籤與視覺化分析，協助用戶養成結構化理財思維。",
+    imageUrl: "/image/stock-tracker.jpg",
+    tags: [
+      "0 to 1 Product",
+      "FinTech",
+      "Saas",
+      "AI Coding"
+    ],
+    projectUrl: "https://stock-tracker-q9jc.onrender.com/",
+    notionUrl: "https://pumped-agustinia-c1c.notion.site/Stock-Tracker-1f8fd1f02cf280f79ae9c8e9977fad3b",
+    featured: true,
+    order: 1,
+    createdAt: "2025-05-19T17:07:37.216Z",
+    updatedAt: "2025-05-19T17:07:37.217Z"
   },
   {
-    id: 2,
-    title: '智慧數據分析平台',
-    description: '企業級數據分析平台，提供即時視覺化報表與預測分析功能。',
-    imageUrl: 'https://via.placeholder.com/800x450?text=Data+Analytics+Platform',
-    tags: ['React', 'Python', 'D3.js', 'MongoDB'],
-    projectUrl: 'https://example.com/data-analytics',
+    _id: "682b65595204acecad854dc2",
+    title: "Auth-Nexus | 多工作區認證系統",
+    description: "一套多租戶認證管理系統，整合JWT身份驗證與權限控制，將傳統認證系統建置時間從數週縮短至數日，協助開發者快速實現安全可靠的用戶管理功能",
+    imageUrl: "/image/auth-nexus.jpg",
+    tags: [
+      "0 to 1 Product",
+      "AI Coding",
+      "Saas",
+      "InfoSec"
+    ],
+    projectUrl: "https://auth-nexus-client.onrender.com/login",
+    notionUrl: "https://pumped-agustinia-c1c.notion.site/Auth-Nexus-1f0fd1f02cf2803d84bdf619f8613668",
+    featured: true,
+    order: 2,
+    createdAt: "2025-05-19T17:07:37.217Z",
+    updatedAt: "2025-05-19T17:07:37.217Z"
   },
   {
-    id: 3,
-    title: '區塊鏈資產追蹤系統',
-    description: '安全可靠的區塊鏈技術應用，用於追蹤與管理數位資產。',
-    imageUrl: 'https://via.placeholder.com/800x450?text=Blockchain+Asset+Tracker',
-    tags: ['Solidity', 'React', 'Web3.js', 'Ethereum'],
-    projectUrl: 'https://example.com/blockchain-tracker',
+    _id: "682b65595204acecad854dc3",
+    title: "STAR Generator | AI 報告產生器",
+    description: "一款協助第一線銷售人員快速產出 STAR 結構月報的自動化工具，將撰寫時間從 2 小時縮短至 5 分鐘。",
+    imageUrl: "/image/star-generator.jpg",
+    tags: [
+      "AI Agent",
+      "Prompt Engineering",
+      "AI Coding"
+    ],
+    projectUrl: "https://star-generator-v2-client.onrender.com/",
+    notionUrl: "https://pumped-agustinia-c1c.notion.site/STAR-Generator-AI-1e7fd1f02cf280e6b729f128187aac94",
+    featured: false,
+    order: 3,
+    createdAt: "2025-05-19T17:07:37.217Z",
+    updatedAt: "2025-05-19T17:07:37.217Z"
   },
   {
-    id: 4,
-    title: '智慧城市監控儀表板',
-    description: '整合多種城市資源數據的實時監控平台，協助城市管理與規劃。',
-    imageUrl: 'https://via.placeholder.com/800x450?text=Smart+City+Dashboard',
-    tags: ['React', 'Node.js', 'Socket.io', 'GraphQL'],
-    projectUrl: 'https://example.com/smart-city',
-  },
-  {
-    id: 5,
-    title: '醫療影像 AI 診斷輔助',
-    description: '應用深度學習技術協助醫療影像分析，提高診斷準確率。',
-    imageUrl: 'https://via.placeholder.com/800x450?text=Medical+AI+Imaging',
-    tags: ['Python', 'TensorFlow', 'React', 'Flask'],
-    projectUrl: 'https://example.com/medical-ai',
-  },
-  {
-    id: 6,
-    title: '智能家居控制中心',
-    description: '整合各種智能家居設備的中央控制系統，支援語音及遠端操作。',
-    imageUrl: 'https://via.placeholder.com/800x450?text=Smart+Home+Hub',
-    tags: ['React Native', 'Node.js', 'MQTT', 'Firebase'],
-    projectUrl: 'https://example.com/smart-home',
+    _id: "682b65595204acecad854dc4",
+    title: "Event Generator｜事件代碼生成器",
+    description: "一個簡潔直覺的事件代碼生成工具，協助行銷與開發人員快速建立自定義事件追蹤 script，適用於網頁活動紀錄與 GA4 類型追蹤整合。",
+    imageUrl: "/image/event-generator.jpg",
+    tags: [
+      "MarTech",
+      "Tracking Code",
+      "AdTech",
+      "AI Coding"
+    ],
+    projectUrl: "https://event-generator-zv3r.onrender.com/",
+    notionUrl: "https://pumped-agustinia-c1c.notion.site/Event-Generator-1e8fd1f02cf2807290eef8f31bbd4a88",
+    featured: false,
+    order: 4,
+    createdAt: "2025-05-19T17:07:37.217Z",
+    updatedAt: "2025-05-19T17:07:37.217Z"
   }
 ];
 

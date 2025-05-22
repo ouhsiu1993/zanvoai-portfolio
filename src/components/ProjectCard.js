@@ -7,10 +7,10 @@ import {
   Badge,
   Heading,
   Link,
+  Button,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { FiExternalLink } from 'react-icons/fi';
-import { trackEvent } from './Analytics'; // 修正導入路徑，假設在同一目錄
+import { FiExternalLink, FiFileText } from 'react-icons/fi';
 
 // 標籤顏色映射表 - 根據標籤名稱選擇顏色
 const tagColorSchemes = {
@@ -24,11 +24,6 @@ const tagColorSchemes = {
   'Tracking Code': 'purple',
   'AdTech': 'teal',
   'FinTech': 'purple',
-  '..': 'pink',
-  '..': 'blue',
-  '..': 'cyan',
-  '..': 'red',
-  '..': 'teal',
 };
 
 // 根據標籤名稱判斷用哪種顏色，若無對應項則使用預設顏色
@@ -37,20 +32,17 @@ const getTagColorScheme = (tag) => {
 };
 
 const ProjectCard = ({ project }) => {
-  const { title, description, imageUrl, tags, projectUrl } = project;
+  const { title, description, imageUrl, tags, projectUrl, notionUrl } = project;
   
   const cardBg = useColorModeValue('white', 'gray.800');
   const cardBorder = useColorModeValue('gray.200', 'gray.700');
   const textColor = useColorModeValue('gray.600', 'gray.300');
   
-  // 處理點擊事件
-  const handleProjectClick = () => {
-    // 發送點擊事件到 GA4
-    trackEvent('project_click', { 
-      project_name: title,
-      project_url: projectUrl,
-      tags: tags ? tags.join(', ') : ''
-    });
+  // 防止按鈕點擊事件冒泡到卡片
+  const handleButtonClick = (e, url) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(url, '_blank');
   };
   
   return (
@@ -59,7 +51,6 @@ const ProjectCard = ({ project }) => {
       isExternal 
       _hover={{ textDecoration: 'none' }}
       display="block"
-      onClick={handleProjectClick} // 添加點擊處理器
     >
       <Box
         bg={cardBg}
@@ -76,6 +67,7 @@ const ProjectCard = ({ project }) => {
         height="100%"
         display="flex"
         flexDirection="column"
+        position="relative"
       >
         <Box position="relative" overflow="hidden" paddingTop="56.25%"> {/* 16:9 Aspect Ratio */}
           <Image
@@ -89,7 +81,7 @@ const ProjectCard = ({ project }) => {
           />
         </Box>
         
-        <Flex direction="column" p={5} flex={1}>
+        <Flex direction="column" p={5} flex={1} position="relative">
           <Heading as="h3" size="md" mb={2}>
             {title}
           </Heading>
@@ -117,11 +109,32 @@ const ProjectCard = ({ project }) => {
             })}
           </Flex>
           
-          <Flex align="center" justifyContent="flex-end" color="blue.500">
-            <FiExternalLink />
-            <Text ml={1} fontSize="sm" fontWeight="medium">
-              前往試玩
-            </Text>
+          {/* 底部按鈕區域 */}
+          <Flex justify="space-between" align="center">
+            {/* 左下角：專案介紹按鈕 */}
+            {notionUrl && (
+              <Button
+                size="sm"
+                variant="ghost"
+                colorScheme="purple"
+                leftIcon={<FiFileText />}
+                onClick={(e) => handleButtonClick(e, notionUrl)}
+                _hover={{
+                  bg: 'purple.50',
+                  _dark: { bg: 'purple.900' }
+                }}
+              >
+                專案介紹
+              </Button>
+            )}
+            
+            {/* 右下角：查看專案連結 */}
+            <Flex align="center" color="blue.500" ml="auto">
+              <FiExternalLink />
+              <Text ml={1} fontSize="sm" fontWeight="medium">
+                查看專案
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
       </Box>
