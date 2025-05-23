@@ -1,9 +1,10 @@
 import React from 'react';
 import { ChakraProvider, Box, Container, ColorModeScript } from '@chakra-ui/react';
 import Header from './components/Header';
+import HeroSection from './components/HeroSection';
 import ProjectGrid from './components/ProjectGrid';
+import StatsAndFeatures from './components/StatsAndFeatures';
 import Footer from './components/Footer';
-import Analytics from './components/Analytics'; // 正確的導入方式
 import theme from './theme';
 
 function App() {
@@ -11,12 +12,13 @@ function App() {
     <>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <ChakraProvider theme={theme}>
-        <Analytics /> {/* 確保 Analytics 組件正確使用 */}
         <Box minH="100vh" bg="gray.50" _dark={{ bg: "gray.900" }}>
           <Header />
+          <HeroSection />
           <Container maxW="container.xl" py={8}>
             <ProjectGrid />
           </Container>
+          <StatsAndFeatures />
           <Footer />
         </Box>
       </ChakraProvider>

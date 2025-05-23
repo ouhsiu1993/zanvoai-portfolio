@@ -124,7 +124,7 @@ const ProjectCard = ({ project }) => {
                   _dark: { bg: 'purple.900' }
                 }}
               >
-                專案介紹
+                查看介紹
               </Button>
             )}
             
@@ -132,7 +132,7 @@ const ProjectCard = ({ project }) => {
             <Flex align="center" color="blue.500" ml="auto">
               <FiExternalLink />
               <Text ml={1} fontSize="sm" fontWeight="medium">
-                查看專案
+                試玩體驗
               </Text>
             </Flex>
           </Flex>
