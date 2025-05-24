@@ -52,8 +52,9 @@ const About = () => {
 
               {/* 文字容器 - 居中但內容左對齊，調寬 */}
               <Box
-                maxW="6xl"  // 從 4xl 調到 6xl，更寬
+                maxW="4xl"  // 從 4xl 調到 6xl，更寬
                 mx="auto"
+                w="full"
                 textAlign="left"
                 p={{ base: 6, md: 8, lg: 10 }}  // 增加 padding
               >
@@ -105,11 +106,11 @@ const About = () => {
 
           {/* 關於創辦人區塊 - 左右排列 */}
           <Grid 
-            templateColumns={{ base: '1fr', lg: '1fr 300px' }} 
-            gap={{ base: 8, lg: 16 }}
+            templateColumns={{ base: '1fr', lg: '1fr 200px' }} 
+            gap={{ base: 8, lg: 6 }}
             alignItems="center"
             w="full"
-            maxW="5xl"
+            maxW="4xl"
             mx="auto"
           >
             {/* 左側：內容 */}
@@ -146,8 +147,7 @@ const About = () => {
                     maxW={{ base: '3xl', lg: 'none' }}
                     whiteSpace="pre-line"
                   >
-                    {`我相信，每個有才華的人，
-都值得一套更好的表達工具。`}
+                    {`我相信，每個有才華的人，都值得一套更好的表達工具。`}
                   </Text>
                 </VStack>
 

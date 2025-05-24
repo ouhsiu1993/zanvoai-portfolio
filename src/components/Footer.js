@@ -85,7 +85,7 @@ const Footer = () => {
           {/* 右側：聯絡資訊 */}
           <VStack align={{ base: 'center', md: 'flex-end' }} spacing={3}>
             <Text fontSize="sm" color={textColor}>
-              商業合作請聯繫
+              技術諮詢請/商業合作請聯繫
             </Text>
             <HStack spacing={2}>
               <Icon as={FiMail} color={emailColor} boxSize={4} />
