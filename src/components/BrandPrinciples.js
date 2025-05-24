@@ -23,14 +23,14 @@ const LottieAnimation = ({ animationData, isActive, fallbackEmoji = "🎯" }) =>
   if (!animationData) {
     return (
       <Box 
-        w="300px" 
-        h="300px" 
+        w="280px" 
+        h="280px" 
         display="flex" 
         alignItems="center" 
         justifyContent="center"
         fontSize="6xl"
         opacity={isActive ? 1 : 0.4}
-        transition="all 0.8s"
+        transition="all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
       >
         {fallbackEmoji}
       </Box>
@@ -38,7 +38,12 @@ const LottieAnimation = ({ animationData, isActive, fallbackEmoji = "🎯" }) =>
   }
 
   return (
-    <Box w="300px" h="300px" opacity={isActive ? 1 : 0.4} transition="all 0.8s">
+    <Box 
+      w="280px" 
+      h="280px" 
+      opacity={isActive ? 1 : 0.4} 
+      transition="all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+    >
       <Lottie
         animationData={animationData}
         loop={isActive}
@@ -64,7 +69,6 @@ const PrincipleCard = ({ principle, index }) => {
       if (!cardRef.current) return;
       
       const rect = cardRef.current.getBoundingClientRect();
-      // 更精確的觸發範圍：卡片中心點在視窗中央40%區域內才亮起
       const cardCenter = rect.top + rect.height / 2;
       const windowCenter = window.innerHeight / 2;
       const isVisible = Math.abs(cardCenter - windowCenter) < window.innerHeight * 0.2;
@@ -73,18 +77,41 @@ const PrincipleCard = ({ principle, index }) => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // 初始檢查
+    handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 處理按鈕點擊
+  // 處理按鈕點擊 - 使用與其他組件一致的滾動邏輯
   const handleActionClick = (link) => {
     if (link.startsWith('#')) {
-      const element = document.querySelector(link);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      // 移除 # 符號獲取真實的 section ID
+      const sectionId = link.substring(1);
+      
+      // 使用與 HeroSection 和 Footer 一致的滾動邏輯
+      const scrollToSection = (targetId, offset = 100) => {
+        let element = document.getElementById(targetId);
+        
+        // 備用查找方式
+        if (!element && targetId === 'projects-section') {
+          element = document.querySelector('[data-scroll-section="projects"]');
+        }
+        
+        if (element) {
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        } else {
+          console.warn(`找不到元素: ${targetId}`);
+        }
+      };
+      
+      // 執行滾動，使用適當的偏移量
+      scrollToSection(sectionId, 100);
     } else {
       window.open(link, '_blank');
     }
@@ -96,18 +123,18 @@ const PrincipleCard = ({ principle, index }) => {
     <Grid
       ref={cardRef}
       templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
-      gap={12}
+      gap={{ base: 8, md: 12, lg: 16 }}
       alignItems="center"
       w="full"
       opacity={isActive ? 1 : 0.4}
       transform={isActive ? 'translateY(0)' : 'translateY(20px)'}
-      transition="all 0.8s ease-out"
-      mb={20}
+      transition="all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+      mb={{ base: 20, md: 32 }}
     >
       {/* 文字內容 */}
       <GridItem order={{ base: 1, lg: isEven ? 1 : 2 }}>
-        <VStack align="start" spacing={6}>
-          {/* 標籤 */}
+        <VStack align="start" spacing={{ base: 6, md: 8 }}>
+          {/* 標籤 - SaaS 風格優化 */}
           <Box
             px={4}
             py={2}
@@ -116,7 +143,9 @@ const PrincipleCard = ({ principle, index }) => {
             borderRadius="full"
             fontSize="sm"
             fontWeight="medium"
-            transition="all 0.8s"
+            transition="all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+            letterSpacing="wide"
+            textTransform="uppercase"
             _dark={{
               bg: isActive ? 'blue.900' : 'gray.700',
               color: isActive ? 'blue.300' : 'gray.400'
@@ -125,29 +154,40 @@ const PrincipleCard = ({ principle, index }) => {
             {principle.tag}
           </Box>
           
+          {/* 標題 - 強化層次 */}
           <Heading
             as="h3"
-            size="xl"
+            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+            fontWeight="bold"
             color={isActive ? 'blue.600' : 'gray.500'}
-            transition="color 0.8s"
+            transition="color 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+            lineHeight="1.2"
+            letterSpacing="tight"
           >
             {principle.title}
           </Heading>
           
-          <Text fontSize="lg" 
-                lineHeight="tall" 
-                color={textColor}
-                whiteSpace="pre-line"
+          {/* 描述文字 - 優化行距 */}
+          <Text 
+            fontSize={{ base: 'md', md: 'lg' }}
+            lineHeight="1.8"
+            color={textColor}
+            whiteSpace="pre-line"
+            fontWeight="400"
           >
             {principle.description}
           </Text>
           
+          {/* 行動按鈕 - SaaS 風格 */}
           <Button
             colorScheme="blue"
             variant={isActive ? 'solid' : 'outline'}
             size="lg"
             onClick={() => handleActionClick(principle.action.link)}
-            transition="all 0.3s"
+            transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+            fontWeight="semibold"
+            borderRadius="lg"
+            px={6}
             _hover={{
               transform: 'translateY(-2px)',
               shadow: 'lg',
@@ -163,14 +203,18 @@ const PrincipleCard = ({ principle, index }) => {
         <Box
           bg={cardBg}
           borderRadius="2xl"
-          p={8}
+          p={{ base: 6, md: 8 }}
           borderWidth="1px"
           borderColor={isActive ? 'blue.200' : borderColor}
-          transition="all 0.8s"
+          transition="all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
           boxShadow={isActive ? 'xl' : 'md'}
           display="flex"
           justifyContent="center"
           alignItems="center"
+          _hover={{
+            boxShadow: '2xl',
+            borderColor: 'blue.300',
+          }}
         >
           <LottieAnimation
             animationData={principle.animationData}
@@ -187,7 +231,7 @@ const PrincipleCard = ({ principle, index }) => {
 const BrandPrinciples = () => {
   const bgColor = useColorModeValue('gray.50', 'gray.900');
 
-  // 品牌原則數據 - 帶標籤的新格式
+  // 品牌原則數據
   const principles = [
     {
       tag: '創意',
@@ -227,32 +271,36 @@ const BrandPrinciples = () => {
     <Box
       id="brand-story"
       bg={bgColor}
-      py={{ base: 16, md: 24 }}
+      py={0}  // 由外層 App.js 控制間距
     >
       <Container maxW="container.xl">
-        {/* 區塊標題 */}
-        <VStack spacing={4} textAlign="center" mb={16}>
+        {/* 區塊標題 - 優化間距和層次 */}
+        <VStack spacing={{ base: 4, md: 6 }} textAlign="center" mb={{ base: 16, md: 24 }}>
           <Text
-            fontSize={{ base: 'lg', md: 'xl' }}
+            fontSize={{ base: 'sm', md: 'md' }}
             color="blue.500"
             fontWeight="medium"
             letterSpacing="wider"
             textTransform="uppercase"
+            lineHeight="1.2"
           >
             在 ZanvoAI
           </Text>
           <Heading
             as="h2"
-            size={{ base: 'xl', md: '2xl' }}
+            fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
             bgGradient="linear(to-r, blue.500, purple.500)"
             bgClip="text"
             fontWeight="bold"
+            lineHeight="1.2"
+            letterSpacing="tight"
+            maxW="4xl"
           >
             我們這樣思考與行動
           </Heading>
         </VStack>
 
-        {/* 4張獨立卡片 */}
+        {/* 4張獨立卡片 - 優化間距 */}
         <VStack spacing={0}>
           {principles.map((principle, index) => (
             <PrincipleCard 

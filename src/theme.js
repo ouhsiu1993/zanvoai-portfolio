@@ -12,6 +12,19 @@ const theme = extendTheme({
     body: 'Inter, sans-serif',
   },
   colors: {
+    // 護眼配色方案
+    brand: {
+      50: '#f8fafc',   // 替代 gray.50 - 更溫和的背景
+      100: '#f1f5f9',  // 卡片背景 - 不刺眼的白
+      200: '#e2e8f0',
+      300: '#cbd5e1',
+      400: '#94a3b8',
+      500: '#64748b',
+      600: '#475569',
+      700: '#334155',
+      800: '#1e293b',
+      900: '#0f172a',
+    },
     blue: {
       50: '#e6f2ff',
       100: '#bddeff',
@@ -36,6 +49,15 @@ const theme = extendTheme({
       800: '#48107e',
       900: '#38065e',
     }
+  },
+  // 全域樣式覆蓋
+  styles: {
+    global: (props) => ({
+      'html, body': {
+        backgroundColor: props.colorMode === 'light' ? 'brand.50' : 'gray.900',
+        color: props.colorMode === 'light' ? 'gray.800' : 'gray.100',
+      },
+    }),
   },
   config,
 });

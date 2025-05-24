@@ -15,29 +15,40 @@ import {
 
 const HeroSection = () => {
   const canvasRef = useRef(null);
-  const bgColor = useColorModeValue('gray.50', 'gray.900');
+const bgColor = useColorModeValue('gray.100', 'gray.900');
   const textColor = useColorModeValue('gray.600', 'gray.300');
   
+  // 通用滾動函數 - 支援多種查找方式
+  const scrollToSection = (sectionId, dataSection, offset = 100) => {
+    // 嘗試多種方式找到元素
+    let element = document.getElementById(sectionId);
+    
+    if (!element && dataSection) {
+      element = document.querySelector(`[data-scroll-section="${dataSection}"]`);
+    }
+    
+    if (!element) {
+      console.warn(`找不到元素: ${sectionId} 或 [data-scroll-section="${dataSection}"]`);
+      return;
+    }
+
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  };
+
   // 滾動到作品區的函數
   const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects-section');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    scrollToSection('projects-section', 'projects', 100);
   };
 
   // 滾動到品牌理念的函數
   const scrollToBrandStory = () => {
-    const brandStorySection = document.getElementById('brand-story');
-    if (brandStorySection) {
-      brandStorySection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    scrollToSection('brand-story', 'brand', 100);
   };
 
   // 粒子動畫效果
@@ -133,7 +144,7 @@ const HeroSection = () => {
   return (
     <Box 
       position="relative"
-      minH="90vh"
+      minH="100vh"
       display="flex"
       alignItems="center"
       overflow="hidden"
@@ -202,91 +213,107 @@ const HeroSection = () => {
         }}
       />
 
-      {/* 主要內容 - 現在置中顯示 */}
-      <Container maxW="container.lg" position="relative" zIndex={2} py={{ base: 20, md: 32 }}>
-        <VStack spacing={10} textAlign="center" maxW="4xl" mx="auto">
-          {/* 小字 */}
+      {/* 主要內容 - 調整間距遵循 SaaS 標準 */}
+      <Container maxW="container.lg" position="relative" zIndex={2} py={{ base: 32, md: 40 }}>
+        <VStack spacing={{ base: 10, md: 12 }} textAlign="center" maxW="5xl" mx="auto">
+          {/* 小字標籤 - SaaS 風格 */}
           <Text
-            fontSize={{ base: 'md', md: 'lg' }}
+            fontSize={{ base: 'sm', md: 'md' }}
             color="blue.500"
             fontWeight="medium"
-            letterSpacing="wide"
+            letterSpacing="wider"
+            textTransform="uppercase"
+            lineHeight="1.2"
           >
-            AI Technology
+            AI Technology Solutions
           </Text>
           
-          {/* 主標 - 超大字體，核心重點 */}
-          <Heading
-            as="h1"
-            fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
-            fontWeight="extrabold"
-            lineHeight="0.9"
-            bgGradient="linear(to-r, blue.500, purple.500, teal.400)"
-            bgClip="text"
-            animation="gradientShift 3s ease-in-out infinite"
-            sx={{
-              '@keyframes gradientShift': {
-                '0%, 100%': { backgroundPosition: '0% 50%' },
-                '50%': { backgroundPosition: '100% 50%' },
-              },
-              backgroundSize: '200% 200%',
-            }}
-            textAlign="center"
-            mb={2}
+          {/* 主標 - 加強字體層次和間距 */}
+          <VStack spacing={{ base: 6, md: 8 }}>
+            <Heading
+              as="h1"
+              fontSize={{ base: '4xl', md: '6xl', lg: '7xl' }}
+              fontWeight="extrabold"
+              lineHeight="1.1"
+              letterSpacing="tight"
+              bgGradient="linear(to-r, blue.500, purple.500, teal.400)"
+              bgClip="text"
+              animation="gradientShift 3s ease-in-out infinite"
+              sx={{
+                '@keyframes gradientShift': {
+                  '0%, 100%': { backgroundPosition: '0% 50%' },
+                  '50%': { backgroundPosition: '100% 50%' },
+                },
+                backgroundSize: '200% 200%',
+              }}
+              textAlign="center"
+            >
+              用 AI 把想法做出來
+            </Heading>
+          </VStack>
+          
+          {/* 副標 - 優化行距和間距 */}
+          <Box maxW="4xl" px={{ base: 4, md: 0 }}>
+            <Text
+              fontSize={{ base: 'lg', md: 'xl' }}
+              color={textColor}
+              lineHeight="1.8"
+              textAlign="center"
+              fontWeight="400"
+            >
+              將概念轉化為能運作的原型，ZanvoAI 探索 AI 技術的所有可能，
+              <Box as="br" display={{ base: 'none', md: 'block' }} />
+              歡迎你帶著熱情，和我們一起將靈感實現。
+            </Text>
+          </Box>
+          
+          {/* CTA 按鈕 - 優化間距和樣式 */}
+          <HStack 
+            spacing={{ base: 4, md: 6 }} 
+            flexDirection={{ base: 'column', sm: 'row' }}
+            pt={{ base: 4, md: 6 }}
           >
-            用 AI 把想法做出來
-          </Heading>
-          
-{/* 副標 - 說明文字 */}
-<VStack spacing={3} maxW="4xl">
-  <Text
-    fontSize={{ base: 'lg', md: 'xl' }}
-    color={textColor}
-    lineHeight="2.0"  // 原本是 "tall"，改成數字增加行距
-    textAlign="center"
-  >
-    將概念轉化為能運作的原型，ZanvoAI 探索 AI 技術的所有可能，<br />
-    歡迎你帶著熱情，和我們一起將靈感實現。
-  </Text>
-</VStack>
-          
-          {/* CTA 按鈕 */}
-          <HStack spacing={6} flexDirection={{ base: 'column', sm: 'row' }}>
             <Button
-              size="xl"
+              size="lg"
               colorScheme="blue"
               onClick={scrollToProjects}
-              px={6}
-              py={4}
-              fontSize="xl"
+              px={{ base: 6, md: 8 }}
+              py={{ base: 3, md: 4 }}
+              fontSize={{ base: 'md', md: 'lg' }}
+              fontWeight="semibold"
               _hover={{
-                transform: 'translateY(-3px)',
+                transform: 'translateY(-2px)',
                 shadow: 'xl',
                 bgGradient: 'linear(to-r, blue.500, blue.600)',
               }}
-              transition="all 0.3s"
+              transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
               boxShadow="lg"
               bgGradient="linear(to-r, blue.500, blue.600)"
+              borderRadius="lg"
             >
               🚀 試玩作品
             </Button>
             
             <Button
-              size="xl"
+              size="lg"
               variant="outline"
               colorScheme="purple"
-              px={6}
-              py={4}
-              fontSize="xl"
+              px={{ base: 6, md: 8 }}
+              py={{ base: 3, md: 4 }}
+              fontSize={{ base: 'md', md: 'lg' }}
+              fontWeight="semibold"
               _hover={{
-                transform: 'translateY(-3px)',
+                transform: 'translateY(-2px)',
                 shadow: 'lg',
                 bg: 'purple.50',
                 _dark: { bg: 'purple.900' },
+                borderColor: 'purple.400',
               }}
-              transition="all 0.3s"
+              transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
               onClick={scrollToBrandStory}
               backdropFilter="blur(10px)"
+              borderRadius="lg"
+              borderWidth="2px"
             >
               📖 品牌理念
             </Button>

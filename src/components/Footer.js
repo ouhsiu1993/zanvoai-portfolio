@@ -16,7 +16,7 @@ import { FiMail } from 'react-icons/fi';
 
 const Footer = () => {
   const borderColor = useColorModeValue('gray.200', 'gray.700');
-  const bgColor = useColorModeValue('white', 'gray.800');
+  const bgColor = useColorModeValue('white', 'gray.800'); // Footer 保持 white 作為區隔
   const textColor = useColorModeValue('gray.600', 'gray.300');
   const emailColor = useColorModeValue('blue.600', 'blue.400');
   
@@ -55,25 +55,26 @@ const Footer = () => {
       bg={bgColor}
       borderTop="1px"
       borderColor={borderColor}
-      py={{ base: 8, md: 12 }}
+      py={{ base: 10, md: 16 }}
+      mt={{ base: 20, md: 32 }}
     >
       <Container maxW="container.xl" w="full">
-        <VStack spacing={{ base: 6, md: 8 }} align="stretch">
-          {/* 主要內容區 - 修復桌面版佈局 */}
+        <VStack spacing={{ base: 8, md: 12 }} align="stretch">
+          {/* 主要內容區 */}
           <Flex
             direction={{ base: 'column', md: 'row' }}
             justify="space-between"
             align={{ base: 'center', md: 'flex-start' }}
-            gap={{ base: 6, md: 8 }}
+            gap={{ base: 8, md: 10 }}
           >
             {/* 左側：品牌 + 導航 */}
             <VStack 
               align={{ base: 'center', md: 'flex-start' }} 
-              spacing={4}
+              spacing={{ base: 6, md: 8 }}
               flex="1"
             >
               <Text 
-                fontSize={{ base: 'lg', md: 'xl' }}
+                fontSize={{ base: 'xl', md: '2xl' }}
                 fontWeight="bold"
                 color={emailColor}
                 cursor="pointer"
@@ -87,74 +88,70 @@ const Footer = () => {
                 }}
                 _hover={{
                   transform: 'scale(1.05)',
-                  transition: 'transform 0.2s',
+                  transition: 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
+                letterSpacing="tight"
               >
                 ZanvoAI
               </Text>
               
-              {/* 導航連結 - 手機版垂直，桌面版水平 */}
+              {/* 導航連結 */}
               <HStack 
-                spacing={6} 
-                fontSize="sm"
+                spacing={{ base: 4, md: 8 }} 
+                fontSize={{ base: 'sm', md: 'md' }}
                 flexDirection={{ base: 'column', md: 'row' }}
                 align="center"
               >
-                <Link 
-                  onClick={() => scrollToSection('brand-story')}
-                  color={textColor}
-                  _hover={{ color: emailColor }}
-                  cursor="pointer"
-                  transition="color 0.2s"
-                >
-                  品牌理念
-                </Link>
-                <Link 
-                  onClick={() => scrollToSection('projects-section')}
-                  color={textColor}
-                  _hover={{ color: emailColor }}
-                  cursor="pointer"
-                  transition="color 0.2s"
-                >
-                  作品集
-                </Link>
-                <Link 
-                  onClick={() => scrollToSection('about')}
-                  color={textColor}
-                  _hover={{ color: emailColor }}
-                  cursor="pointer"
-                  transition="color 0.2s"
-                >
-                  關於我們
-                </Link>
+                {[
+                  { text: '品牌理念', section: 'brand-story' },
+                  { text: '作品集', section: 'projects-section' },
+                  { text: '關於我們', section: 'about' }
+                ].map((nav, index) => (
+                  <Link 
+                    key={index}
+                    onClick={() => scrollToSection(nav.section)}
+                    color={textColor}
+                    _hover={{ 
+                      color: emailColor,
+                      transform: 'translateY(-1px)'
+                    }}
+                    cursor="pointer"
+                    transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
+                    fontWeight="medium"
+                  >
+                    {nav.text}
+                  </Link>
+                ))}
               </HStack>
             </VStack>
 
             {/* 右側：聯絡資訊 */}
             <VStack 
               align={{ base: 'center', md: 'flex-end' }} 
-              spacing={3}
+              spacing={{ base: 4, md: 6 }}
               flex="1"
             >
               <Text 
-                fontSize="sm" 
+                fontSize={{ base: 'sm', md: 'md' }}
                 color={textColor}
                 textAlign={{ base: 'center', md: 'right' }}
+                lineHeight="1.6"
+                fontWeight="medium"
               >
-                技術諮詢/商業合作請聯繫
+                技術諮詢 / 商業合作請聯繫
               </Text>
-              <HStack spacing={2} justify={{ base: 'center', md: 'flex-end' }}>
-                <Icon as={FiMail} color={emailColor} boxSize={4} />
+              <HStack spacing={3} justify={{ base: 'center', md: 'flex-end' }}>
+                <Icon as={FiMail} color={emailColor} boxSize={5} />
                 <Link 
                   href="mailto:zaovoai@gmail.com"
                   color={emailColor}
-                  fontWeight="medium"
-                  fontSize="md"
+                  fontWeight="semibold"
+                  fontSize={{ base: 'md', md: 'lg' }}
                   _hover={{ 
                     textDecoration: 'underline',
                     transform: 'scale(1.05)',
                   }}
-                  transition="all 0.2s"
+                  transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
                 >
                   zaovoai@gmail.com
                 </Link>
@@ -162,11 +159,22 @@ const Footer = () => {
             </VStack>
           </Flex>
 
+          {/* 精緻分隔線 */}
+          <Box w="full" position="relative">
+            <Divider 
+              borderColor={borderColor}
+              borderWidth="0.5px"
+              opacity={0.6}
+            />
+          </Box>
+
           {/* 底部版權 */}
-          <Box textAlign="center" pt={{ base: 4, md: 6 }}>
+          <Box textAlign="center" pt={{ base: 2, md: 4 }}>
             <Text 
-              fontSize="sm"
+              fontSize={{ base: 'xs', md: 'sm' }}
               color={useColorModeValue('gray.400', 'gray.500')}
+              fontWeight="400"
+              letterSpacing="wide"
             >
               © {new Date().getFullYear()} ZanvoAI. All Rights Reserved
             </Text>

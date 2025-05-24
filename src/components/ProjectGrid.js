@@ -10,6 +10,7 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  VStack,
 } from '@chakra-ui/react';
 import ProjectCard from './ProjectCard';
 import { fetchAllProjects } from '../api/projectApi';
@@ -132,37 +133,60 @@ const ProjectGrid = () => {
 
   return (
     <Box as="section" id="projects-section">
-      <Box textAlign="center" mb={10}>
+      {/* 標題區域 - SaaS 風格優化 */}
+      <VStack spacing={{ base: 4, md: 6 }} textAlign="center" mb={{ base: 10, md: 16 }}>
+        <Text
+          fontSize={{ base: 'sm', md: 'md' }}
+          color="blue.500"
+          fontWeight="medium"
+          letterSpacing="wider"
+          textTransform="uppercase"
+          lineHeight="1.2"
+        >
+          Portfolio
+        </Text>
+        
         <Heading
           as="h2"
-          size="2xl"
-          mb={4}
+          fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
           bgGradient="linear(to-r, blue.500, purple.500)"
           bgClip="text"
-          fontWeight="extrabold"
+          fontWeight="bold"
+          lineHeight="1.2"
+          letterSpacing="tight"
+          maxW="4xl"
+          mb={{ base: 2, md: 4 }}
         >
           我們的實現成果
         </Heading>
 
         <Text
-          fontSize="md"
+          fontSize={{ base: 'sm', md: 'md' }}
           maxW="container.md"
           mx="auto"
-          mt={2}
           color="gray.500"
           _dark={{ color: 'gray.400' }}
+          lineHeight="1.6"
+          px={{ base: 4, md: 0 }}
         >
           免費服務有冷啟動時間，還請耐心等候
         </Text>
-      </Box>
+      </VStack>
 
-      {/* 錯誤提示 */}
+      {/* 錯誤提示 - 優化設計 */}
       {error && !usingFallback && (
-        <Alert status="warning" mb={6} borderRadius="md">
+        <Alert 
+          status="warning" 
+          mb={{ base: 6, md: 8 }} 
+          borderRadius="lg"
+          variant="left-accent"
+        >
           <AlertIcon />
           <Box>
-            <AlertTitle>API 連接問題</AlertTitle>
-            <AlertDescription>
+            <AlertTitle fontSize="md" fontWeight="semibold">
+              API 連接問題
+            </AlertTitle>
+            <AlertDescription fontSize="sm" lineHeight="1.6">
               無法從伺服器獲取最新資料，正在使用備用資料。
               <Text 
                 as="button" 
@@ -170,6 +194,8 @@ const ProjectGrid = () => {
                 textDecoration="underline"
                 ml={2}
                 onClick={handleRetry}
+                fontWeight="medium"
+                _hover={{ color: 'blue.600' }}
               >
                 點擊重試
               </Text>
@@ -178,27 +204,51 @@ const ProjectGrid = () => {
         </Alert>
       )}
 
-      {/* 使用備用資料提示 */}
+      {/* 使用備用資料提示 - 優化設計 */}
       {usingFallback && !error && (
-        <Alert status="info" mb={6} borderRadius="md">
+        <Alert 
+          status="info" 
+          mb={{ base: 6, md: 8 }} 
+          borderRadius="lg"
+          variant="left-accent"
+        >
           <AlertIcon />
-          <AlertDescription>
+          <AlertDescription fontSize="sm" lineHeight="1.6">
             正在載入最新資料，目前顯示的是快取內容...
           </AlertDescription>
         </Alert>
       )}
 
+      {/* 載入狀態 - 優化樣式 */}
       {loading && projects.length === 0 ? (
-        <Center>
-          <Box textAlign="center">
-            <Spinner size="xl" mb={4} />
-            <Text color="gray.500">載入專案資料中...</Text>
-          </Box>
+        <Center py={{ base: 16, md: 20 }}>
+          <VStack spacing={4}>
+            <Spinner 
+              size="xl" 
+              color="blue.500"
+              thickness="3px"
+            />
+            <Text 
+              color="gray.500" 
+              fontSize="md"
+              fontWeight="medium"
+            >
+              載入專案資料中...
+            </Text>
+          </VStack>
         </Center>
       ) : (
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+        /* 專案網格 - 優化間距 */
+        <SimpleGrid 
+          columns={{ base: 1, md: 2, lg: 3 }} 
+          spacing={{ base: 6, md: 8, lg: 10 }}
+          w="full"
+        >
           {projects.map((project, index) => (
-            <ProjectCard key={project._id || project.id || index} project={project} />
+            <ProjectCard 
+              key={project._id || project.id || index} 
+              project={project} 
+            />
           ))}
         </SimpleGrid>
       )}
