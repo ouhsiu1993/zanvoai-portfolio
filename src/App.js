@@ -3,9 +3,10 @@ import { ChakraProvider, Box, Container, ColorModeScript } from '@chakra-ui/reac
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProjectGrid from './components/ProjectGrid';
-import StatsAndFeatures from './components/StatsAndFeatures';
+import BrandPrinciples from './components/BrandPrinciples';
 import Footer from './components/Footer';
 import theme from './theme';
+import About from './components/About';
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
         <Box minH="100vh" bg="gray.50" _dark={{ bg: "gray.900" }}>
           <Header />
           <HeroSection />
+          <BrandPrinciples />
           <Container maxW="container.xl" py={8}>
             <ProjectGrid />
           </Container>
-          <StatsAndFeatures />
+          <About /> 
           <Footer />
         </Box>
       </ChakraProvider>

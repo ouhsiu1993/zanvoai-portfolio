@@ -29,6 +29,17 @@ const HeroSection = () => {
     }
   };
 
+  // 滾動到品牌理念的函數
+  const scrollToBrandStory = () => {
+    const brandStorySection = document.getElementById('brand-story');
+    if (brandStorySection) {
+      brandStorySection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   // 粒子動畫效果
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -119,11 +130,6 @@ const HeroSection = () => {
     };
   }, []);
 
-  // 技能標籤
-  const skills = [
-    '0 to 1 Product', 'AI Agent', 'FinTech', 'SaaS Development'
-  ];
-
   return (
     <Box 
       position="relative"
@@ -199,22 +205,22 @@ const HeroSection = () => {
       {/* 主要內容 - 現在置中顯示 */}
       <Container maxW="container.lg" position="relative" zIndex={2} py={{ base: 20, md: 32 }}>
         <VStack spacing={10} textAlign="center" maxW="4xl" mx="auto">
-          {/* 小標 */}
+          {/* 小字 */}
           <Text
-            fontSize={{ base: 'lg', md: 'xl' }}
+            fontSize={{ base: 'md', md: 'lg' }}
             color="blue.500"
             fontWeight="medium"
             letterSpacing="wide"
           >
-            和我一起
+            創意 x 技術 x 實踐 x 探索
           </Text>
           
-          {/* 主標 */}
+          {/* 主標 - 超大字體，核心重點 */}
           <Heading
             as="h1"
-            size={{ base: '2xl', md: '4xl', lg: '5xl' }}
-            fontWeight="bold"
-            lineHeight="shorter"
+            fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
+            fontWeight="extrabold"
+            lineHeight="0.9"
             bgGradient="linear(to-r, blue.500, purple.500, teal.400)"
             bgClip="text"
             animation="gradientShift 3s ease-in-out infinite"
@@ -225,43 +231,24 @@ const HeroSection = () => {
               },
               backgroundSize: '200% 200%',
             }}
-            whiteSpace={{ base: 'normal', md: 'nowrap' }}
+            textAlign="center"
+            mb={2}
           >
             用 AI 把想法做出來
           </Heading>
           
-          {/* 副標 */}
-          <Text
-            fontSize={{ base: 'lg', md: 'xl' }}
-            color={textColor}
-            lineHeight="tall"
-            maxW="3xl"
-          >
-            Hi! 我是 <Text as="span" fontWeight="bold" color="blue.500">ODI</Text>，一個熱愛技術與商業的超級 I 人。
-            <br />
-            <Text as="span" fontWeight="bold" color="purple.500">ZanvoAI</Text> 是我打造的個人創作品牌，專注於用 AI 幫助自己與他人「說清楚、做出來」，讓好點子有機會被做出來。
-          </Text>
-
-          {/* 技能標籤 */}
-          <Flex wrap="wrap" gap={3} justifyContent="center">
-            {skills.map((skill, index) => (
-              <Badge
-                key={index}
-                colorScheme={index % 3 === 0 ? 'blue' : index % 3 === 1 ? 'purple' : 'teal'}
-                px={4}
-                py={2}
-                borderRadius="full"
-                fontSize="md"
-                transition="all 0.3s"
-                _hover={{
-                  transform: 'scale(1.05)',
-                  shadow: 'md',
-                }}
-              >
-                {skill}
-              </Badge>
-            ))}
-          </Flex>
+          {/* 副標 - 說明文字 */}
+          <VStack spacing={3} maxW="4xl">
+            <Text
+              fontSize={{ base: 'lg', md: 'xl' }}
+              color={textColor}
+              lineHeight="tall"
+              textAlign="center"
+            >
+              將構想轉化為能運作的原型，ZanvoAI 幫助你「說清楚、做出來」。
+              
+            </Text>
+          </VStack>
           
           {/* CTA 按鈕 */}
           <HStack spacing={6} flexDirection={{ base: 'column', sm: 'row' }}>
@@ -269,8 +256,8 @@ const HeroSection = () => {
               size="xl"
               colorScheme="blue"
               onClick={scrollToProjects}
-              px={12}
-              py={8}
+              px={6}
+              py={4}
               fontSize="xl"
               _hover={{
                 transform: 'translateY(-3px)',
@@ -288,8 +275,8 @@ const HeroSection = () => {
               size="xl"
               variant="outline"
               colorScheme="purple"
-              px={12}
-              py={8}
+              px={6}
+              py={4}
               fontSize="xl"
               _hover={{
                 transform: 'translateY(-3px)',
@@ -298,8 +285,7 @@ const HeroSection = () => {
                 _dark: { bg: 'purple.900' },
               }}
               transition="all 0.3s"
-              as="a"
-              href="#brand-story"
+              onClick={scrollToBrandStory}
               backdropFilter="blur(10px)"
             >
               📖 品牌理念
