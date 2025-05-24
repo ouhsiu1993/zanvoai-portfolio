@@ -261,9 +261,9 @@ const bgColor = useColorModeValue('gray.100', 'gray.900');
               textAlign="center"
               fontWeight="400"
             >
-              將概念轉化為能運作的原型，ZanvoAI 探索 AI 技術的所有可能，
+              將概念轉化為能運作的原型，ZanvoAI 是為專業工作者打造的 AI 產品孵化器，
               <Box as="br" display={{ base: 'none', md: 'block' }} />
-              歡迎你帶著熱情，和我們一起將靈感實現。
+              歡迎你帶著熱情，加入我們一起將靈感實現!
             </Text>
           </Box>
           
