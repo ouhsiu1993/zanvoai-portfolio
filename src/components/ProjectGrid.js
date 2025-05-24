@@ -141,17 +141,9 @@ const ProjectGrid = () => {
           bgClip="text"
           fontWeight="extrabold"
         >
-          作品集
+          我們的實現成果
         </Heading>
-        <Text
-          fontSize="xl"
-          maxW="container.md"
-          mx="auto"
-          color="gray.600"
-          _dark={{ color: 'gray.300' }}
-        >
-          探索 ZanvoAI 的實現成果，點擊卡片開始試玩
-        </Text>
+
         <Text
           fontSize="md"
           maxW="container.md"

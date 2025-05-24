@@ -32,7 +32,7 @@ const About = () => {
       py={{ base: 16, md: 32 }}
     >
       <Container maxW="container.xl">
-        <VStack spacing={{ base: 20, md: 32 }}>
+        <VStack spacing={{ base: 20, md: 32 }}> {/* 主區塊間保持較大間距，建立明確層次 */}
 
           {/* 關於 ZanvoAI 區塊 - 可控制斷行版 */}
           <Box w="full" maxW="5xl" mx="auto">
@@ -97,202 +97,362 @@ const About = () => {
             </VStack>
           </Box>
 
-          {/* 分隔線 */}
-          <Divider 
-            maxW="300px" 
-            borderColor={useColorModeValue('gray.200', 'gray.700')}
-            borderWidth="2px"
-          />
+          {/* 分隔線 - 優化設計符合 SaaS 標準 */}
+          <Box position="relative" w="full" maxW="400px">
+            <Divider 
+              borderColor={useColorModeValue('gray.200', 'gray.700')}
+              borderWidth="1px"
+              opacity={0.6}
+            />
+            <Box
+              position="absolute"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              w="4px"
+              h="4px"
+              bg={useColorModeValue('blue.400', 'blue.500')}
+              borderRadius="full"
+            />
+          </Box>
 
-          {/* 關於創辦人區塊 - 左右排列 */}
-          <Grid 
-            templateColumns={{ base: '1fr', lg: '1fr 200px' }} 
-            gap={{ base: 8, lg: 6 }}
-            alignItems="center"
-            w="full"
-            maxW="4xl"
-            mx="auto"
-          >
-            {/* 左側：內容 */}
-            <GridItem>
-              <VStack spacing={6} align={{ base: 'center', lg: 'start' }} textAlign={{ base: 'center', lg: 'left' }}>
-                <Heading
-                  as="h3"
-                  fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}  // 調小標題
-                  fontWeight="bold"
-                  color={highlightColor}
-                  lineHeight="shorter"
+          {/* 關於創辦人區塊 - 修復桌面版佈局 */}
+          <Box w="full" maxW="6xl" mx="auto" mt={{ base: 10, md: 20 }}>
+            {/* 手機版和平板版 - 垂直排列 */}
+            <VStack 
+              spacing={8} 
+              display={{ base: 'flex', lg: 'none' }}
+              textAlign="center"
+            >
+              <Heading
+                as="h3"
+                fontSize={{ base: '2xl', md: '3xl' }}
+                fontWeight="bold"
+                color={highlightColor}
+                lineHeight="shorter"
+                letterSpacing="tight"
+              >
+                關於創辦人
+              </Heading>
+
+              {/* 手機版頭像 */}
+              <Box
+                w="120px"
+                h="120px"
+                borderRadius="full"
+                overflow="hidden"
+                boxShadow="xl"
+                mx="auto"
+              >
+                <Image
+                  src="/ODI Black Ghibli.png"
+                  alt="創辦人 ODI"
+                  w="100%"
+                  h="100%"
+                  objectFit="cover"
+                  fallback={
+                    <Box
+                      w="100%"
+                      h="100%"
+                      bgGradient="linear(to-br, blue.400, purple.500)"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      color="white"
+                      fontSize="xl"
+                      fontWeight="bold"
+                    >
+                      ODI
+                    </Box>
+                  }
+                />
+              </Box>
+
+              <VStack spacing={6} maxW="3xl">
+                <Text
+                  fontSize={{ base: 'md', md: 'lg' }}
+                  color={textColor}
+                  lineHeight="1.8"
+                  whiteSpace="pre-line"
                 >
-                  關於創辦人
-                </Heading>
-
-                <VStack spacing={6} align={{ base: 'center', lg: 'start' }} textAlign={{ base: 'center', lg: 'left' }}>
-                  <Text
-                    fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-                    color={textColor}
-                    lineHeight="1.8"
-                    maxW={{ base: '3xl', lg: 'none' }}
-                    whiteSpace="pre-line"
-                  >
-                    {`一名長期致力於新創產品與技術實作的產品經理，
+                  {`一名長期致力於新創產品與技術實作的產品經理，
 正在用 AI 強化自己的職涯輸出力。`}
-                  </Text>
+                </Text>
 
-                  <Text
-                    fontSize={{ base: 'sm', md: 'md', lg: 'lg' }}
-                    color={useColorModeValue('gray.500', 'gray.400')}
-                    lineHeight="tall"
-                    fontStyle="italic"
-                    fontWeight="light"
-                    maxW={{ base: '3xl', lg: 'none' }}
-                    whiteSpace="pre-line"
-                  >
-                    {`我相信，每個有才華的人，都值得一套更好的表達工具。`}
-                  </Text>
-                </VStack>
-
-                {/* 聯絡區塊 - email和社群連結一行 */}
-                <HStack 
-                  spacing={6} 
-                  align="center"
-                  justify="space-between"
-                  w="full"
-                  maxW="400px"
-                  flexDirection={{ base: 'column', sm: 'row' }}
+                <Text
+                  fontSize={{ base: 'sm', md: 'md' }}
+                  color={useColorModeValue('gray.500', 'gray.400')}
+                  lineHeight="tall"
+                  fontStyle="italic"
+                  fontWeight="light"
+                  whiteSpace="pre-line"
                 >
-                  {/* Email */}
-                  <HStack spacing={2}>
-                    <Icon as={FiMail} color={linkColor} boxSize={4} />
-                    <Link
-                      href="mailto:ouhsiu1993@gmail.com"
-                      fontSize="md"
-                      color={emphasisColor}
-                      fontWeight="medium"
-                      _hover={{
-                        textDecoration: 'underline',
-                        color: 'blue.600'
-                      }}
-                      transition="all 0.2s"
-                    >
-                      ouhsiu1993@gmail.com
-                    </Link>
-                  </HStack>
+                  {`我相信，每個有才華的人，都值得一套更好的表達工具。`}
+                </Text>
+              </VStack>
 
-                  {/* 社群連結 - 靠右 */}
-                  <HStack spacing={3}>
-                    <Link 
-                      href="https://www.linkedin.com/in/hsiu-ou-a24a4021b/" 
-                      isExternal
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      w="36px"
-                      h="36px"
-                      borderRadius="full"
-                      bg={useColorModeValue('gray.100', 'gray.700')}
-                      color={linkColor}
-                      _hover={{ 
-                        bg: useColorModeValue('blue.50', 'blue.900'),
-                        color: 'blue.600',
-                        transform: 'translateY(-2px)'
-                      }}
-                      transition="all 0.3s"
-                    >
-                      <Icon as={FiLinkedin} boxSize={4} />
-                    </Link>
-                    
-                    <Link 
-                      href="https://github.com/ouhsiu1993" 
-                      isExternal
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      w="36px"
-                      h="36px"
-                      borderRadius="full"
-                      bg={useColorModeValue('gray.100', 'gray.700')}
-                      color={linkColor}
-                      _hover={{ 
-                        bg: useColorModeValue('blue.50', 'blue.900'),
-                        color: 'blue.600',
-                        transform: 'translateY(-2px)'
-                      }}
-                      transition="all 0.3s"
-                    >
-                      <Icon as={FiGithub} boxSize={4} />
-                    </Link>
-                    
-                    <Link 
-                      href="https://reurl.cc/j9rXzn" 
-                      isExternal
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      w="36px"
-                      h="36px"
-                      borderRadius="full"
-                      bg={useColorModeValue('gray.100', 'gray.700')}
-                      color={linkColor}
-                      _hover={{ 
-                        bg: useColorModeValue('blue.50', 'blue.900'),
-                        color: 'blue.600',
-                        transform: 'translateY(-2px)'
-                      }}
-                      transition="all 0.3s"
-                    >
-                      <Icon as={SiNotion} boxSize={4} />
-                    </Link>
-                  </HStack>
+              {/* 手機版聯絡資訊 */}
+              <VStack spacing={4}>
+                <HStack spacing={2}>
+                  <Icon as={FiMail} color={linkColor} boxSize={4} />
+                  <Link
+                    href="mailto:ouhsiu1993@gmail.com"
+                    fontSize="md"
+                    color={emphasisColor}
+                    fontWeight="medium"
+                    _hover={{
+                      textDecoration: 'underline',
+                      color: 'blue.600'
+                    }}
+                    transition="all 0.2s"
+                  >
+                    ouhsiu1993@gmail.com
+                  </Link>
+                </HStack>
+
+                <HStack spacing={3}>
+                  <Link 
+                    href="https://www.linkedin.com/in/hsiu-ou-a24a4021b/" 
+                    isExternal
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="36px"
+                    h="36px"
+                    borderRadius="full"
+                    bg={useColorModeValue('gray.100', 'gray.700')}
+                    color={linkColor}
+                    _hover={{ 
+                      bg: useColorModeValue('blue.50', 'blue.900'),
+                      color: 'blue.600',
+                      transform: 'translateY(-2px)'
+                    }}
+                    transition="all 0.3s"
+                  >
+                    <Icon as={FiLinkedin} boxSize={4} />
+                  </Link>
+                  
+                  <Link 
+                    href="https://github.com/ouhsiu1993" 
+                    isExternal
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="36px"
+                    h="36px"
+                    borderRadius="full"
+                    bg={useColorModeValue('gray.100', 'gray.700')}
+                    color={linkColor}
+                    _hover={{ 
+                      bg: useColorModeValue('blue.50', 'blue.900'),
+                      color: 'blue.600',
+                      transform: 'translateY(-2px)'
+                    }}
+                    transition="all 0.3s"
+                  >
+                    <Icon as={FiGithub} boxSize={4} />
+                  </Link>
+                  
+                  <Link 
+                    href="https://reurl.cc/j9rXzn" 
+                    isExternal
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="36px"
+                    h="36px"
+                    borderRadius="full"
+                    bg={useColorModeValue('gray.100', 'gray.700')}
+                    color={linkColor}
+                    _hover={{ 
+                      bg: useColorModeValue('blue.50', 'blue.900'),
+                      color: 'blue.600',
+                      transform: 'translateY(-2px)'
+                    }}
+                    transition="all 0.3s"
+                  >
+                    <Icon as={SiNotion} boxSize={4} />
+                  </Link>
                 </HStack>
               </VStack>
-            </GridItem>
+            </VStack>
 
-            {/* 右側：頭像 */}
-            <GridItem display={{ base: 'none', lg: 'block' }}>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Box
-                  w="140px"
-                  h="140px"
-                  borderRadius="full"
-                  overflow="hidden"
-                  boxShadow="2xl"
-                  transition="all 0.3s"
-                  _hover={{
-                    transform: 'scale(1.05)',
-                    boxShadow: '3xl'
-                  }}
-                >
-                  <Image
-                    src="/ODI Black Ghibli.png"
-                    alt="創辦人 ODI"
-                    w="100%"
-                    h="100%"
-                    objectFit="cover"
-                    fallback={
-                      <Box
-                        w="100%"
-                        h="100%"
-                        bg="gradient.500"
-                        bgGradient="linear(to-br, blue.400, purple.500)"
+            {/* 桌面版 - 左右排列 */}
+            <Grid 
+              templateColumns="1fr 200px" 
+              gap={12}
+              alignItems="center"
+              display={{ base: 'none', lg: 'grid' }}
+            >
+              {/* 左側：內容 */}
+              <GridItem>
+                <VStack spacing={8} align="start" textAlign="left">
+                  <Heading
+                    as="h3"
+                    fontSize="4xl"
+                    fontWeight="bold"
+                    color={highlightColor}
+                    lineHeight="shorter"
+                    letterSpacing="tight"
+                  >
+                    關於創辦人
+                  </Heading>
+
+                  <VStack spacing={6} align="start">
+                    <Text
+                      fontSize="xl"
+                      color={textColor}
+                      lineHeight="1.8"
+                      whiteSpace="pre-line"
+                    >
+                      {`一名長期致力於新創產品與技術實作的產品經理，正在用 AI 強化自己的職涯輸出力。`}
+                    </Text>
+
+                    <Text
+                      fontSize="lg"
+                      color={useColorModeValue('gray.500', 'gray.400')}
+                      lineHeight="tall"
+                      fontStyle="italic"
+                      fontWeight="light"
+                      whiteSpace="pre-line"
+                    >
+                      {`我相信，每個有才華的人，都值得一套更好的表達工具。`}
+                    </Text>
+                  </VStack>
+
+                  {/* 桌面版聯絡資訊 */}
+                  <HStack spacing={8} align="center" pt={4}>
+                    <HStack spacing={2}>
+                      <Icon as={FiMail} color={linkColor} boxSize={4} />
+                      <Link
+                        href="mailto:ouhsiu1993@gmail.com"
+                        fontSize="md"
+                        color={emphasisColor}
+                        fontWeight="medium"
+                        _hover={{
+                          textDecoration: 'underline',
+                          color: 'blue.600'
+                        }}
+                        transition="all 0.2s"
+                      >
+                        ouhsiu1993@gmail.com
+                      </Link>
+                    </HStack>
+
+                    <HStack spacing={3}>
+                      <Link 
+                        href="https://www.linkedin.com/in/hsiu-ou-a24a4021b/" 
+                        isExternal
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        color="white"
-                        fontSize="2xl"
-                        fontWeight="bold"
+                        w="36px"
+                        h="36px"
+                        borderRadius="full"
+                        bg={useColorModeValue('gray.100', 'gray.700')}
+                        color={linkColor}
+                        _hover={{ 
+                          bg: useColorModeValue('blue.50', 'blue.900'),
+                          color: 'blue.600',
+                          transform: 'translateY(-2px)'
+                        }}
+                        transition="all 0.3s"
                       >
-                        ODI
-                      </Box>
-                    }
-                  />
+                        <Icon as={FiLinkedin} boxSize={4} />
+                      </Link>
+                      
+                      <Link 
+                        href="https://github.com/ouhsiu1993" 
+                        isExternal
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        w="36px"
+                        h="36px"
+                        borderRadius="full"
+                        bg={useColorModeValue('gray.100', 'gray.700')}
+                        color={linkColor}
+                        _hover={{ 
+                          bg: useColorModeValue('blue.50', 'blue.900'),
+                          color: 'blue.600',
+                          transform: 'translateY(-2px)'
+                        }}
+                        transition="all 0.3s"
+                      >
+                        <Icon as={FiGithub} boxSize={4} />
+                      </Link>
+                      
+                      <Link 
+                        href="https://reurl.cc/j9rXzn" 
+                        isExternal
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        w="36px"
+                        h="36px"
+                        borderRadius="full"
+                        bg={useColorModeValue('gray.100', 'gray.700')}
+                        color={linkColor}
+                        _hover={{ 
+                          bg: useColorModeValue('blue.50', 'blue.900'),
+                          color: 'blue.600',
+                          transform: 'translateY(-2px)'
+                        }}
+                        transition="all 0.3s"
+                      >
+                        <Icon as={SiNotion} boxSize={4} />
+                      </Link>
+                    </HStack>
+                  </HStack>
+                </VStack>
+              </GridItem>
+
+              {/* 右側：頭像 */}
+              <GridItem>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Box
+                    w="160px"
+                    h="160px"
+                    borderRadius="full"
+                    overflow="hidden"
+                    boxShadow="2xl"
+                    transition="all 0.3s"
+                    _hover={{
+                      transform: 'scale(1.05)',
+                      boxShadow: '3xl'
+                    }}
+                  >
+                    <Image
+                      src="/ODI Black Ghibli.png"
+                      alt="創辦人 ODI"
+                      w="100%"
+                      h="100%"
+                      objectFit="cover"
+                      fallback={
+                        <Box
+                          w="100%"
+                          h="100%"
+                          bgGradient="linear(to-br, blue.400, purple.500)"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          color="white"
+                          fontSize="2xl"
+                          fontWeight="bold"
+                        >
+                          ODI
+                        </Box>
+                      }
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </GridItem>
-          </Grid>
+              </GridItem>
+            </Grid>
+          </Box>
 
         </VStack>
       </Container>
