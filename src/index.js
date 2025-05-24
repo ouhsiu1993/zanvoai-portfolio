@@ -19,7 +19,7 @@ root.render(
 );
 
 // 修改網頁標題
-document.title = 'ZanvoAI Portfolio';
+document.title = 'ZanvoAI';
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
