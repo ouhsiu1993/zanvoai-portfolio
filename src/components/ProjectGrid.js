@@ -150,7 +150,7 @@ const ProjectGrid = () => {
           color="gray.600"
           _dark={{ color: 'gray.300' }}
         >
-          探索 ZanvoAI 的專案作品，點擊卡片開始試玩
+          探索 ZanvoAI 的實現成果，點擊卡片開始試玩
         </Text>
         <Text
           fontSize="md"

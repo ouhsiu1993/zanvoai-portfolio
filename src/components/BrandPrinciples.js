@@ -134,7 +134,11 @@ const PrincipleCard = ({ principle, index }) => {
             {principle.title}
           </Heading>
           
-          <Text fontSize="lg" lineHeight="tall" color={textColor}>
+          <Text fontSize="lg" 
+                lineHeight="tall" 
+                color={textColor}
+                whiteSpace="pre-line"
+          >
             {principle.description}
           </Text>
           
@@ -187,8 +191,8 @@ const BrandPrinciples = () => {
   const principles = [
     {
       tag: '創意',
-      title: '每個好點子，都值得被實現',
-      description: '我們深信，好的想法不該因技術門檻而無法實現，每個創意都值得一次嘗試的機會。',
+      title: '每個好點子，都值得被看見',
+      description: '我們相信，想法不該只停留在腦海中，每個創意，都值得一次嘗試的機會。',
       action: { text: '看看我們的創意實現', link: '#projects-section' },
       animationData: ideaToProductAnimation,
       fallbackEmoji: '💡'
@@ -204,7 +208,7 @@ const BrandPrinciples = () => {
     {
       tag: '實踐',
       title: '再完美的計畫都比不上實際的行動',
-      description: '與其花三個月做計畫，不如花三週做出原型，讓市場告訴我們答案。',
+      description: '與其花三個月做計畫，不如花三週快速做出原型，讓市場告訴我們答案。',
       action: { text: '體驗我們的實踐成果', link: '#projects-section' },
       animationData: aiAssistantAnimation,
       fallbackEmoji: '🚀'
@@ -212,7 +216,7 @@ const BrandPrinciples = () => {
     {
       tag: '探索',
       title: 'AI 讓實現變得更容易',
-      description: '我們持續探索 AI 的所有應用與可能，結合商業 x 產品思維 x AI 技術，快速將腦中概念轉換成可體驗的原型。',
+      description: '我們持續投入 AI 技術的最新應用，結合商業 x 技術 x 產品思維，\n幫助非技術人士快速驗證商業想法。',
       action: { text: '一起探索 AI 可能性', link: '#projects-section' },
       animationData: problemFocusAnimation,
       fallbackEmoji: '🔍'

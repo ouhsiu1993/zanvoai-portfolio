@@ -212,7 +212,7 @@ const HeroSection = () => {
             fontWeight="medium"
             letterSpacing="wide"
           >
-            創意 x 技術 x 實踐 x 探索
+            AI Technology
           </Text>
           
           {/* 主標 - 超大字體，核心重點 */}
@@ -237,18 +237,18 @@ const HeroSection = () => {
             用 AI 把想法做出來
           </Heading>
           
-          {/* 副標 - 說明文字 */}
-          <VStack spacing={3} maxW="4xl">
-            <Text
-              fontSize={{ base: 'lg', md: 'xl' }}
-              color={textColor}
-              lineHeight="tall"
-              textAlign="center"
-            >
-              將構想轉化為能運作的原型，ZanvoAI 幫助你「說清楚、做出來」。
-              
-            </Text>
-          </VStack>
+{/* 副標 - 說明文字 */}
+<VStack spacing={3} maxW="4xl">
+  <Text
+    fontSize={{ base: 'lg', md: 'xl' }}
+    color={textColor}
+    lineHeight="2.0"  // 原本是 "tall"，改成數字增加行距
+    textAlign="center"
+  >
+    將概念轉化為能運作的原型，ZanvoAI 探索 AI 技術的所有可能，<br />
+    歡迎你帶著熱情，和我們一起將靈感實現。
+  </Text>
+</VStack>
           
           {/* CTA 按鈕 */}
           <HStack spacing={6} flexDirection={{ base: 'column', sm: 'row' }}>
@@ -268,7 +268,7 @@ const HeroSection = () => {
               boxShadow="lg"
               bgGradient="linear(to-r, blue.500, blue.600)"
             >
-              🚀 開始試玩
+              🚀 試玩作品
             </Button>
             
             <Button
